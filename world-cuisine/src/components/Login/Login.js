@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword } from "./firebaseUtils";
+import { auth, logInWithEmailAndPassword } from "../../scripts/firebaseUtils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 function Login() {
