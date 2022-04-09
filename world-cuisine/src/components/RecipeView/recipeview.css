@@ -1,0 +1,30 @@
+.recipeViewContainer{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(30, 144, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.recipeView{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: max-content;
+    width: 50%;
+    min-width: 500px;
+    margin: auto;
+    background-color:honeydew;
+    min-height: 50%;
+    overflow-y: auto;
+}
+
+.recipeView button{
+    display: block;
+    margin: auto auto 2% auto;
+}

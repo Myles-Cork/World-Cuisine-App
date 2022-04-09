@@ -21,7 +21,7 @@ class FavPage extends React.Component {
     return (
         <div>
           <h1>Your Favorite Recipes</h1>
-          <FavList favresults={results}/>
+          <FavList favresults={results} openRecipe={this.props.openRecipe}/>
         </div>
       );
   }

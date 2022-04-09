@@ -23,7 +23,7 @@ class SearchPage extends React.Component {
         <div>
           <h1>Search for Recipes</h1>
           <SearchMenu/>
-          <SearchList searchresults={results}/>
+          <SearchList searchresults={results} openRecipe={this.props.openRecipe}/>
         </div>
       );
   }
