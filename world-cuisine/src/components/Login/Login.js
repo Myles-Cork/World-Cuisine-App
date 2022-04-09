@@ -15,11 +15,11 @@ function Login() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/dashboard");
+    if (user) navigate("/home/search");
   }, [user, loading]);
   return (
     <div className="login">
-      <div className="login__container">
+      <form className="login__container">
         <input
           type="text"
           className="login__textBox"
@@ -35,8 +35,12 @@ function Login() {
           placeholder="Password"
         />
         <button
+          type="submit"
           className="login__btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
+          onClick={(event) => {
+            event.preventDefault();
+            logInWithEmailAndPassword(email, password);
+          }}
         >
           Login
         </button>
@@ -46,7 +50,7 @@ function Login() {
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
-      </div>
+      </form>
     </div>
   );
 }

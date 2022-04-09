@@ -1,0 +1,26 @@
+.favList {
+  width: 40%;
+  min-width: 500px;
+  margin: auto;
+  background-color: #eeeeee;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.favResult {
+  padding: 10% 0;
+  height: max-content;
+  width: 100%;
+}
+
+.favResult h2 {
+  margin: 1% auto 1% auto;
+  text-align: center;
+}
+
+.favResult img {
+  display: block;
+  max-width: 50%;
+  max-height: 50%;
+  margin: 0 auto 0 auto;
+}

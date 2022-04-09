@@ -1,0 +1,36 @@
+.searchMenu {
+  width: max-content;
+  margin: 1% auto 1% auto;
+}
+
+.searchMenu button {
+  display: block;
+  margin: 10px auto 10px auto;
+}
+
+.searchList {
+  width: 40%;
+  min-width: 500px;
+  margin: auto;
+  background-color: #eeeeee;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.searchResult {
+  padding: 10% 0;
+  height: max-content;
+  width: 100%;
+}
+
+.searchResult h2 {
+  margin: 1% auto 1% auto;
+  text-align: center;
+}
+
+.searchResult img {
+  display: block;
+  max-width: 50%;
+  max-height: 50%;
+  margin: 0 auto 0 auto;
+}

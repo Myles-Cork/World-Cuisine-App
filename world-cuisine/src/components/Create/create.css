@@ -1,0 +1,22 @@
+.createForm {
+  width: max-content;
+  margin: 1% auto 1% auto;
+}
+
+.createForm ul {
+  height: max-content;
+  margin: 0;
+  padding: 0;
+}
+
+.createForm li {
+  display: block;
+  width:100%;
+  height: min-content;
+  list-style: none;
+}
+
+.createForm button {
+  display: block;
+  margin: 10px auto 10px auto;
+}

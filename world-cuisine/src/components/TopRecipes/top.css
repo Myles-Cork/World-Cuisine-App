@@ -1,0 +1,11 @@
+.topList {
+  width: 40%;
+  min-width: 500px;
+  margin: auto;
+  background-color: #eeeeee;
+  padding: 10px;
+}
+
+.topResult {
+  margin: 10px;
+}
