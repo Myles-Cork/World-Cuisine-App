@@ -22,6 +22,14 @@
     background-color:honeydew;
     min-height: 50%;
     overflow-y: auto;
+    border-radius: 50px;
+}
+
+.outsideView{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
 }
 
 .recipeView button{

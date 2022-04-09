@@ -19,6 +19,7 @@ class RecipeView extends React.Component {
           <p>Integer blandit nisl sed scelerisque elementum. Phasellus finibus, tellus vitae faucibus fringilla, turpis lorem suscipit enim, a congue turpis lectus nec nisl. In porttitor aliquam magna. Ut vitae posuere odio. Sed scelerisque hendrerit tellus, quis porttitor augue suscipit laoreet. Curabitur ipsum augue, aliquam vel ultrices vitae, finibus maximus dui. Pellentesque pharetra in erat quis rutrum. Nunc dui arcu, tempus sed turpis vitae, consectetur iaculis velit. Curabitur ut fringilla diam. Aliquam vulputate rutrum dapibus. </p>
           <button onClick={() => {this.props.openRecipe("")}}>Exit</button>
         </div>
+        <div className="outsideView" onClick={(e) => {this.props.openRecipe("")}}/>
       </div>
     ) : null;
 
