@@ -17,6 +17,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/home/*" element={<HomePage />} />
+          <Route path="/search/" element={<SearchPage />} />
         </Routes>
       </Router>
     </div>

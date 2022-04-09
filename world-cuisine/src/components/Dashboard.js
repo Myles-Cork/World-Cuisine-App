@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Dashboard.css";
 import SearchList from "./Search/SearchList";
 import SearchMenu from "./Search/SearchMenu";
