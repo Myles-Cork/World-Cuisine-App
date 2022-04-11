@@ -57,21 +57,21 @@ const logout = () => {
   signOut(auth);
 };
 
-//https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
-const saveRecipes = async(recipes, cuisine) => {
-  if (!cuisine){
-    return;
-  }
+// //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
+// const saveRecipes = async(recipes, cuisine) => {
+//   if (!cuisine){
+//     return;
+//   }
 
-  for (let r of recipes){
-    await addDoc(collection(db, `recipes`), {
-      id: r.id,
-      title: r.title,
-      image: r.image,
-    });
+//   for (let r of recipes){
+//     await addDoc(collection(db, `recipes`), {
+//       id: r.id,
+//       title: r.title,
+//       image: r.image,
+//     });
 
-  }
-}
+//   }
+// }
 
 export {
   auth,
@@ -80,5 +80,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
-  saveRecipes,
+  // saveRecipes,
 };

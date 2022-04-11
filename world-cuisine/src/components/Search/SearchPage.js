@@ -3,7 +3,8 @@ import "./search.css";
 import SearchList from "./SearchList";
 import SearchMenu from "./SearchMenu";
 import Recipe from "../../model/Recipe";
-import {saveRecipes} from "../../scripts/firebaseUtils";
+
+// import {saveRecipes} from "../../scripts/firebaseUtils";
 // import { queryCuisine } from '../../scripts/spoonacularUtils';
 
 class SearchPage extends React.Component {
@@ -22,7 +23,7 @@ class SearchPage extends React.Component {
       console.log(data)
       let recipes = Recipe.arrayFromApiResults(data["results"]);
       // TODO: check if there is anyting to save
-      saveRecipes(recipes, this.state.cuisine);
+      Recipe.saveRecipes(recipes, this.state.cuisine);
       this.setState({results: recipes})
     })
     .catch(error => console.error(error));

@@ -1,11 +1,17 @@
 import React from "react";
 import "./recipeview.css";
+import Recipe from "../../model/Recipe";
 
 class RecipeView extends React.Component {
 
   render(){
+    console.log(this.props);
     const name = this.props.id; //will need to get a name and other fields using the id, for now just display the id (temporarily the name of the recipe)
     const visible = this.props.id!=="";
+
+    console.log(this.props.id);
+    const current = Recipe.retrieveRecipe(this.props.id);
+    console.log(current);
 
     const view = visible?(
       <div className="recipeViewContainer">

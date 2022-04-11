@@ -12,13 +12,14 @@ class HomePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      recipeIdOpened: ""
+      recipeIdOpened: null
     };
 
     this.openRecipe = this.openRecipe.bind(this);
   }
   
   openRecipe(id){
+    console.log(`Opening recipe: ${id}`);
     this.setState({
       recipeIdOpened: id
     });

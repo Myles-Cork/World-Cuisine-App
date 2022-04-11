@@ -3,11 +3,13 @@ import "./search.css"
 
 class SearchResult extends React.Component{
   render(){
+    console.log(`Search result props:`);
+    console.log(this.props);
     return(
-      <div className="searchResult" onClick={() => {this.props.openRecipe(this.props.name)}}>
+      <div className="searchResult" onClick={() => {this.props.openRecipe(this.props.recipe.id)}}>
         {/* <img src={require("../../images/recipeIcon.png")}/> */}
-        <img src={this.props.image}/>
-        <h2>{this.props.name}</h2>
+        <img src={this.props.recipe.image}/>
+        <h2>{this.props.recipe.title}</h2>
       </div>
     );
   }
