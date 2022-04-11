@@ -5,7 +5,8 @@ class SearchResult extends React.Component{
   render(){
     return(
       <div className="searchResult" onClick={() => {this.props.openRecipe(this.props.name)}}>
-        <img src={require("../../images/recipeIcon.png")}/>
+        {/* <img src={require("../../images/recipeIcon.png")}/> */}
+        <img src={this.props.image}/>
         <h2>{this.props.name}</h2>
       </div>
     );

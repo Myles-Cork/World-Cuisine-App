@@ -2,24 +2,15 @@ import React from "react";
 import "./search.css";
 import SearchList from "./SearchList";
 import SearchMenu from "./SearchMenu";
+import Recipe from "../../model/Recipe";
+import {saveRecipes} from "../../scripts/firebaseUtils";
 // import { queryCuisine } from '../../scripts/spoonacularUtils';
 
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [
-        {id: 0, title: "pizza"},
-        {id: 1, title: "pasta"},
-        {id: 2, title: "soup"},
-        {id: 3, title: "sandwich"},
-        {id: 4, title: "sandwich"},
-        {id: 5, title: "sandwich"},
-        {id: 6, title: "sandwich"},
-        {id: 7, title: "sandwich"},
-        {id: 8, title: "sandwich"},
-        {id: 9, title: "sandwich"}
-        ],
+      results: [],
     }
     this.cuisine = null;
   };
@@ -29,7 +20,10 @@ class SearchPage extends React.Component {
     .then(response => response.json()) // A second promise
     .then(data => { // Second promise resolved
       console.log(data)
-      this.setState({results: data["results"]})
+      let recipes = Recipe.arrayFromApiResults(data["results"]);
+      // TODO: check if there is anyting to save
+      saveRecipes(recipes, this.state.cuisine);
+      this.setState({results: recipes})
     })
     .catch(error => console.error(error));
   }
