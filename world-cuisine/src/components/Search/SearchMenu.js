@@ -5,7 +5,8 @@ import "../../scripts/spoonacularUtils"
 
 class SearchMenu extends React.Component{
 
-  onSelect = () => {
+  onSelect = (event) => {
+    event.preventDefault();
     let cuisineSelection = document.getElementById("cuisineSelect").value;
     console.log(cuisineSelection);
     this.props.onSelect(cuisineSelection);

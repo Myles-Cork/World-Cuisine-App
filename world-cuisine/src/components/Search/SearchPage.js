@@ -29,7 +29,7 @@ class SearchPage extends React.Component {
     .then(response => response.json()) // A second promise
     .then(data => { // Second promise resolved
       console.log(data)
-      //this.setState({results: data["results"]})
+      this.setState({results: data["results"]})
     })
     .catch(error => console.error(error));
   }
