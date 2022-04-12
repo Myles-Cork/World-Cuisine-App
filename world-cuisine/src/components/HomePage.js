@@ -26,7 +26,6 @@ class HomePage extends React.Component {
   }
 
   render(){
-
     return (
       <div>
         <RecipeView recipe={this.state.recipeOpened} openRecipe={this.openRecipe}/>

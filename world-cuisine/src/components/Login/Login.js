@@ -10,6 +10,9 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+  if (user){
+      console.log(user.uid);
+  }
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
