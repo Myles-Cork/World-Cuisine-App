@@ -6,9 +6,8 @@ const spoonacularConfig = {
 
 class SpoonacularAdapter {
 
-  static cuisineSearch(cuisine){
-    console.log(spoonacularConfig.apiKey);
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonacularConfig.apiKey}&cuisine=${cuisine}?`)
+  static cuisineSearch = async (cuisine) => {
+    return fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonacularConfig.apiKey}&cuisine=${cuisine}?`)
     .then(response => response.json()) // A second promise
     .then(data => { // Second promise resolved
       console.log(data);

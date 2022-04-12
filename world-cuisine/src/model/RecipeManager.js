@@ -57,24 +57,6 @@ class RecipeManager {
             }
         }
     }
-  
-    // static searchFirebase(cuisine){
-    //     const recipeSubcollection = collection(db, 'recipes', cuisine, 'recipes');
-    //     const results = getDocs(recipeSubcollection).withConverter(this.recipeConverter);
-    //     return results;
-    // }
-
-    // static fillAsyncArray = async (items) => {
-    //     console.log("Attempting async array");
-    //     const recipes = [];
-    //     items.forEach(async (doc) =>{
-    //         let recipe = (await doc.get()).data();
-    //         console.log(recipe);
-    //         recipes.push(recipe);
-    //     })
-    //     console.log(recipes);
-    //     return recipes;
-    // }
 
     static async queryCuisine(cuisine){
         let collectionref = collection(db, 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
@@ -85,22 +67,23 @@ class RecipeManager {
             recipes = querySnapshot.docs.map(doc => doc.data());
         });
 
-        return recipes;
+        if(recipes.length > 0){
+            return recipes;
+        } else {
+            // Get from Spoonacular
+            return SpoonacularAdapter.cuisineSearch(cuisine)
+            .then((data) => {
+                console.log(data)
+                return RecipeManager.arrayFromApiResults(data["results"])
+            })
+            .then((recipes) => {
+                console.log(recipes)
+                RecipeManager.saveRecipes(recipes, cuisine)
+                return recipes;
+            })
+        }
     }
 
-        // if(recipesFromDB.length > 0){
-        //     return recipesFromDB;
-        // } else {
-        //     // Get from Spoonacular
-        //     const data = SpoonacularAdapter.cuisineSearch(cuisine);
-        //     let recipes = RecipeManager.arrayFromApiResults(data["results"]);
 
-        //     // Save to Firebase
-        //     console.log(`Saving ${cuisine} recipes:`);
-        //     console.log(recipes);
-        //     RecipeManager.saveRecipes(recipes, cuisine);
-        //     return recipes;
-        // }
-    // }
 }
 export default RecipeManager;
