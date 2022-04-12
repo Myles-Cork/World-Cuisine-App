@@ -17,26 +17,14 @@ class SearchPage extends React.Component {
     this.cuisine = null;
   };
 
-  queryCuisine = (cuisineSelection) => {
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=94ce307ee3284d85a81ff5401ca4c74c&cuisine=${cuisineSelection}?`)
-    .then(response => response.json()) // A second promise
-    .then(data => { // Second promise resolved
-      console.log(data)
-      let recipes = RecipeManager.arrayFromApiResults(data["results"]);
-      console.log(`Saving ${cuisineSelection} recipes:`);
-      console.log(recipes);
-      RecipeManager.saveRecipes(recipes, cuisineSelection);
-      this.setState({results: recipes})
-    })
-    .catch(error => console.error(error));
-  }
-
   //https://medium.com/@jasminegump/passing-data-between-a-parent-and-child-in-react-deea2ec8e654
-  handleCuisineSelect = (cuisineSelection) => {
+  handleCuisineSelect = async (cuisineSelection) => {
     this.setState({cuisine: cuisineSelection})
-    this.queryCuisine(cuisineSelection);
+    const recipes = await RecipeManager.queryCuisine(cuisineSelection);
+    console.log("Search Page received recipes:");
+    console.log(recipes);
+    this.setState({results: recipes});
   }
-
 
   render(){
 

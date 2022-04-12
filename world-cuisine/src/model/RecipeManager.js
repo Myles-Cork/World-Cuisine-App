@@ -1,6 +1,23 @@
 import Recipe from "./Recipe";
-import { collection, addDoc, setDoc, getDocs, getDoc, doc, collectionGroup, query, where } from "firebase/firestore";
+import { collection, addDoc, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
 import { db } from "../scripts/firebaseUtils";
+import SpoonacularAdapter from "../scripts/SpoonacularAdapter";
+
+// https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
+const recipeConverter = {
+    toFirestore: (recipe) => {
+        return {
+            id: recipe.id,
+            title: recipe.title,
+            image: recipe.image,
+        };
+    },
+    fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return new Recipe(data.id, data.title, data.image);
+    }
+};
+
 
 class RecipeManager {
 
@@ -15,20 +32,6 @@ class RecipeManager {
         return recipes;
     }
 
-    // https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
-    static recipeConverter = {
-        toFirestore: (recipe) => {
-            return {
-                id: recipe.id,
-                title: recipe.title,
-                image: recipe.image,
-            };
-        },
-        fromFirestore: (snapshot, options) => {
-            const data = snapshot.data(options);
-            return new Recipe(data.id, data.title, data.image);
-        }
-    };
 
     //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
     static saveRecipes = async(recipes, cuisine) => {
@@ -49,27 +52,38 @@ class RecipeManager {
                 console.log(`Recipe ${r.title} already in database`);
             } else {
                 console.log(`Saving recipe ${r.id} in database`);
-                const ref = doc(recipeSubcollection, r.id.toString()).withConverter(RecipeManager.recipeConverter);
+                const ref = doc(recipeSubcollection, r.id.toString()).withConverter(recipeConverter);
                 await setDoc(ref, r);
             }
         }
     }
-  
-    static searchFirebase(cuisine){
-        const recipeSubcollection = collection(db, 'recipes', cuisine, 'recipes');
-        const results = getDocs(recipeSubcollection).withConverter(this.recipeConverter);
-        return results;
+
+    static async queryCuisine(cuisine){
+        let collectionref = collection(db, 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
+
+        let recipes;
+        await getDocs(collectionref)
+        .then(async (querySnapshot) => {
+            recipes = querySnapshot.docs.map(doc => doc.data());
+        });
+
+        if(recipes.length > 0){
+            return recipes;
+        } else {
+            // Get from Spoonacular
+            return SpoonacularAdapter.cuisineSearch(cuisine)
+            .then((data) => {
+                console.log(data)
+                return RecipeManager.arrayFromApiResults(data["results"])
+            })
+            .then((recipes) => {
+                console.log(recipes)
+                RecipeManager.saveRecipes(recipes, cuisine)
+                return recipes;
+            })
+        }
     }
 
-    // static retrieveRecipe = async(recipeID) => {
-    //     console.log(recipeID);
-    //     const matches = query(collectionGroup(db, 'recipes'), where('id', '==', recipeID));
-    //     const querySnapshot = await getDocs(matches);
-    //     console.log(querySnapshot);
-    //     querySnapshot.forEach((doc) => {
-    //         console.log(doc.id, ' => ', doc.data());
-    //     });
-    //     return querySnapshot[0];
-    // }
+
 }
 export default RecipeManager;
