@@ -1,6 +1,6 @@
 import React from 'react';
 import "./search.css"
-import "../../scripts/spoonacularUtils"
+import "../../scripts/SpoonacularAdapter"
 
 
 class SearchMenu extends React.Component{
