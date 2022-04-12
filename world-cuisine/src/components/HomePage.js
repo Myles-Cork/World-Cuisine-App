@@ -12,16 +12,16 @@ class HomePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      recipeIdOpened: null
+      recipeOpened: null
     };
 
     this.openRecipe = this.openRecipe.bind(this);
   }
   
-  openRecipe(id){
-    console.log(`Opening recipe: ${id}`);
+  openRecipe = (r) => {
+    console.log(`Opening recipe: ${r}`);
     this.setState({
-      recipeIdOpened: id
+      recipeOpened: r
     });
   }
 
@@ -29,7 +29,7 @@ class HomePage extends React.Component {
 
     return (
       <div>
-        <RecipeView id={this.state.recipeIdOpened} openRecipe={this.openRecipe}/>
+        <RecipeView recipe={this.state.recipeOpened} openRecipe={this.openRecipe}/>
         <div>
           <NavBar/>
           <Routes>

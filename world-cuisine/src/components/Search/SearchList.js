@@ -6,8 +6,7 @@ class SearchList extends React.Component{
   render(){
     return(
       <div className="searchList">
-          {/* {this.props.searchresults.map(result => <SearchResult key={result.id} name={result.title} image={result.image} openRecipe={this.props.openRecipe}/>)} */}
-          {this.props.searchresults.map(result => <SearchResult key={result.id} recipe={result}/>)}
+          {this.props.searchresults.map(result => <SearchResult key={result.id} recipe={result} openRecipe={this.props.openRecipe}/>)}
       </div>
     );
   }

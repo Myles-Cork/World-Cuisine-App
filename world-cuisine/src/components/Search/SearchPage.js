@@ -3,6 +3,7 @@ import "./search.css";
 import SearchList from "./SearchList";
 import SearchMenu from "./SearchMenu";
 import Recipe from "../../model/Recipe";
+import RecipeManager from "../../model/RecipeManager";
 
 // import {saveRecipes} from "../../scripts/firebaseUtils";
 // import { queryCuisine } from '../../scripts/spoonacularUtils';
@@ -21,9 +22,10 @@ class SearchPage extends React.Component {
     .then(response => response.json()) // A second promise
     .then(data => { // Second promise resolved
       console.log(data)
-      let recipes = Recipe.arrayFromApiResults(data["results"]);
-      // TODO: check if there is anyting to save
-      Recipe.saveRecipes(recipes, this.state.cuisine);
+      let recipes = RecipeManager.arrayFromApiResults(data["results"]);
+      console.log(`Saving ${cuisineSelection} recipes:`);
+      console.log(recipes);
+      RecipeManager.saveRecipes(recipes, cuisineSelection);
       this.setState({results: recipes})
     })
     .catch(error => console.error(error));
