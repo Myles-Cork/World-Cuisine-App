@@ -1,7 +1,7 @@
 import Recipe from "./Recipe";
 import { collection, addDoc, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
-import { db } from "../scripts/firebaseUtils";
-import SpoonacularAdapter from "../scripts/SpoonacularAdapter";
+import { db } from "../adapters/firebaseUtils";
+import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
 
 // https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
 const recipeConverter = {

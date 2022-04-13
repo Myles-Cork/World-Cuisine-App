@@ -1,7 +1,7 @@
 import Recipe from "./Recipe";
 import Rating from "./Rating";
 import { collection, addDoc, setDoc, getDocs, getDoc, doc, collectionGroup, query, where, orderBy, limit} from "firebase/firestore";
-import { db, auth } from "../scripts/firebaseUtils";
+import { db, auth } from "../adapters/firebaseUtils";
 
 class RatingManager {
 
@@ -30,7 +30,7 @@ class RatingManager {
         }
     };
 
-    static searchFirebase(user_id,recipe_id){
+    static searchFirebase = (user_id,recipe_id) => {
         const ratingsCollection = collection(db,'ratings')
         const results = getDocs(ratingsCollection).withConverter(this.ratingConverter);
         console.log(results);
@@ -68,7 +68,7 @@ class RatingManager {
         return null;
     }
 
-    static addNewRating = async(user_id,recipe_id,value) => {
+    static addNewRating = async(user_id, recipe_id, value) => {
         await setDoc(doc(db,'ratings',user_id), {
             id:user_id,
             recipe_id:recipe_id,
