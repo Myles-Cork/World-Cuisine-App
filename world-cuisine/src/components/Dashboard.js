@@ -7,7 +7,7 @@ import "./Dashboard.css";
 import SearchList from "./Search/SearchList";
 import SearchMenu from "./Search/SearchMenu";
 import NavBar from "./Navbar/NavBar";
-import { auth, db, logout } from "../scripts/firebaseUtils";
+import { auth, db, logout } from "../adapters/firebaseUtils";
 import { query, collection, getDocs, where } from "firebase/firestore";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
