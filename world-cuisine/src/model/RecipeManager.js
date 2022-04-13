@@ -32,30 +32,14 @@ class RecipeManager {
         return recipes;
     }
 
-
-    //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
-    static saveRecipes = async(recipes, cuisine) => {
-        if (!cuisine || !recipes){
-            return;
-        }
-        const recipeSubcollection = collection(db, 'recipes', cuisine, 'recipes');
-        console.log(recipeSubcollection);
+    static arrayToFirebase = (recipes,cuisine) => {
+        console.log('arrayToFirebase');
         for (let r of recipes){
-            console.log(`Checking for recipe ${r.id} in database`);
             console.log(r);
-            const docRef = doc(db, 'recipes', cuisine, 'recipes', r.id.toString());
-            //console.log(docRef);
-            const docSnap = await getDoc(docRef);
-            //console.log(docSnap);
-
-            if (docSnap.exists()) {
-                console.log(`Recipe ${r.title} already in database`);
-            } else {
-                console.log(`Saving recipe ${r.id} in database`);
-                const ref = doc(recipeSubcollection, r.id.toString()).withConverter(recipeConverter);
-                await setDoc(ref, r);
-            }
+            const ref = doc(db,'recipes',cuisine, 'recipes', r.id.toString()).withConverter(recipeConverter);
+            setDoc(ref,r);
         }
+        console.log('fin');
     }
 
     static async queryCuisine(cuisine){
@@ -74,11 +58,11 @@ class RecipeManager {
             return SpoonacularAdapter.cuisineSearch(cuisine)
             .then((data) => {
                 console.log(data)
-                return RecipeManager.arrayFromApiResults(data["results"])
+                return RecipeManager.arrayFromApiResults(data["results"],cuisine)
             })
             .then((recipes) => {
                 console.log(recipes)
-                RecipeManager.saveRecipes(recipes, cuisine)
+                RecipeManager.arrayToFirebase(recipes, cuisine);
                 return recipes;
             })
         }
