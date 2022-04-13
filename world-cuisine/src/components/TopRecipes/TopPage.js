@@ -1,8 +1,6 @@
 import React from "react";
 import "./top.css";
 import TopList from "./TopList";
-import NavBar from "../Navbar/NavBar";
-import Dashboard from "../Dashboard";
 
 class TopPage extends React.Component {
 

@@ -5,8 +5,6 @@ import Register from "./components/Login/Register";
 import Reset from "./components/Login/Reset";
 import HomePage from "./components/HomePage";
 import SearchPage from "./components/Search/SearchPage";
-import TopPage from "./components/TopRecipes/TopPage";
-
 
 function App() {
   return (

@@ -7,15 +7,12 @@ import FavPage from "./Favorites/FavPage";
 import CreatePage from "./Create/CreatePage";
 import RecipeView from "./RecipeView/RecipeView";
 import Dashboard from "./Dashboard";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {auth} from "../adapters/firebaseUtils";
 
 class HomePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       recipeOpened: null,
-      // user: auth.currentUser
     };
 
     this.openRecipe = this.openRecipe.bind(this);
@@ -27,13 +24,6 @@ class HomePage extends React.Component {
       recipeOpened: r
     });
   }
-
-  // componentDidMount() {
-  //   const [user, loading, error] = useAuthState(auth);
-  //   this.setState({
-  //     userID: user
-  //   });
-  // }
 
   render(){
     return (

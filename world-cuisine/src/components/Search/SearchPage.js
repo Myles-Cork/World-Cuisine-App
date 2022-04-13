@@ -2,11 +2,7 @@ import React from "react";
 import "./search.css";
 import SearchList from "./SearchList";
 import SearchMenu from "./SearchMenu";
-import Recipe from "../../model/Recipe";
 import RecipeManager from "../../model/RecipeManager";
-
-// import {saveRecipes} from "../../scripts/firebaseUtils";
-// import { queryCuisine } from '../../scripts/spoonacularUtils';
 
 class SearchPage extends React.Component {
   constructor(props) {

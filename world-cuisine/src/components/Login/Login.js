@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword } from "../../adapters/firebaseUtils";
+import FirebaseAdapter from "../../adapters/FirebaseAdapter";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(FirebaseAdapter.getAuth());
   const navigate = useNavigate();
   if (user){
       console.log(user.uid);
@@ -43,7 +43,7 @@ function Login() {
           className="login__btn"
           onClick={(event) => {
             event.preventDefault();
-            logInWithEmailAndPassword(email, password);
+            FirebaseAdapter.logInWithEmailAndPassword(email, password);
           }}
         >
           Login

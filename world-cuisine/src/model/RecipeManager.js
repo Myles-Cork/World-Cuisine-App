@@ -1,6 +1,6 @@
 import Recipe from "./Recipe";
 import { collection, addDoc, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
-import { db } from "../adapters/firebaseUtils";
+import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
 
 // https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
@@ -18,7 +18,6 @@ const recipeConverter = {
     }
 };
 
-
 class RecipeManager {
 
     static arrayFromApiResults = (results) => {
@@ -32,18 +31,17 @@ class RecipeManager {
         return recipes;
     }
 
-
     //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
     static saveRecipes = async(recipes, cuisine) => {
         if (!cuisine || !recipes){
             return;
         }
-        const recipeSubcollection = collection(db, 'recipes', cuisine, 'recipes');
+        const recipeSubcollection = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes');
         console.log(recipeSubcollection);
         for (let r of recipes){
             console.log(`Checking for recipe ${r.id} in database`);
             console.log(r);
-            const docRef = doc(db, 'recipes', cuisine, 'recipes', r.id.toString());
+            const docRef = doc(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes', r.id.toString());
             //console.log(docRef);
             const docSnap = await getDoc(docRef);
             //console.log(docSnap);
@@ -59,7 +57,7 @@ class RecipeManager {
     }
 
     static async queryCuisine(cuisine){
-        let collectionref = collection(db, 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
+        let collectionref = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
 
         let recipes;
         await getDocs(collectionref)

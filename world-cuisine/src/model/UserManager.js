@@ -1,10 +1,12 @@
-import {auth} from "../adapters/firebaseUtils";
+import FirebaseAdapter from "../adapters/FirebaseAdapter";
 
 class UserManager {
 
     static getLoggedInUserId(){
-        const user = auth.currentUser;
+        const auth = FirebaseAdapter.getAuth();
         //console.log(auth);
+        const user = auth.currentUser;
+        //console.log(user);
         if(user){
             //console.log(`Found user ${user.uid}`);
             return user.uid;
@@ -14,9 +16,9 @@ class UserManager {
     }
 
     static getLoggedInUser(){
-        const user = auth.currentUser;
+        const user = FirebaseAdapter.getAuth().currentUser;
         if(user){
-            return auth.currentUser;
+            return user;
         } else {
             console.log("No user logged in");
         }
