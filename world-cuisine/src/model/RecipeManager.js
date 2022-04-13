@@ -1,5 +1,5 @@
 import Recipe from "./Recipe";
-import { collection, addDoc, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
 
@@ -42,9 +42,7 @@ class RecipeManager {
             console.log(`Checking for recipe ${r.id} in database`);
             console.log(r);
             const docRef = doc(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes', r.id.toString());
-            //console.log(docRef);
             const docSnap = await getDoc(docRef);
-            //console.log(docSnap);
 
             if (docSnap.exists()) {
                 console.log(`Recipe ${r.title} already in database`);
