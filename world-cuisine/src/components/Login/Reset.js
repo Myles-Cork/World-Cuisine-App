@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { auth, sendPasswordReset } from "../../adapters/firebaseUtils";
+import FirebaseAdapter from "../../adapters/FirebaseAdapter";
 import "./Reset.css";
+
 function Reset() {
   const [email, setEmail] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(FirebaseAdapter.getAuth());
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
@@ -26,7 +27,7 @@ function Reset() {
         />
         <button
           className="reset__btn"
-          onClick={() => sendPasswordReset(email)}
+          onClick={() => FirebaseAdapter.sendPasswordReset(email)}
         >
           Send password reset email
         </button>

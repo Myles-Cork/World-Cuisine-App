@@ -1,7 +1,5 @@
 import React from "react";
 import "./recipeview.css";
-import Recipe from "../../model/Recipe";
-import RecipeManager from "../../model/RecipeManager";
 import RatingManager from "../../model/RatingManager";
 import UserManager from "../../model/UserManager";
 
@@ -20,9 +18,8 @@ class RecipeView extends React.Component {
 
   componentDidUpdate(){
     const user_id = UserManager.getLoggedInUserId();
-    //console.log(user_id);
+
     if(this.props.recipe){
-      //console.log(this.props.recipe.id)
       RatingManager.getRating(user_id,this.props.recipe.id)
       .then((rating) => {
         this.setState({
@@ -35,12 +32,7 @@ class RecipeView extends React.Component {
 
   render(){
 
-    //console.log(this.props);
     const visible = this.props.recipe!==null;
-
-    //console.log(this.props.id);
-    // const recipe = RecipeManager.retrieveRecipe(this.props.id);
-    // console.log(recipe);
 
     const view = visible?(
       <div className="recipeViewContainer">
