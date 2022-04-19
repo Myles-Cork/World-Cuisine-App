@@ -14,5 +14,14 @@ class SpoonacularAdapter {
     });
   }
 
+  static recipeInformation = async (recipeID) => {
+    return fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${spoonacularConfig.apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      return(data);
+    })
+  }
+
 }
 export default SpoonacularAdapter;

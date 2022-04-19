@@ -10,20 +10,22 @@ const recipeConverter = {
             id: recipe.id,
             title: recipe.title,
             image: recipe.image,
+            text: recipe.text,
         };
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new Recipe(data.id, data.title, data.image);
+        return new Recipe(data.id, data.title, data.image, data.text);
     }
 };
 
 class RecipeManager {
 
-    static arrayFromApiResults = (results) => {
+    static arrayFromApiResults = async(results) => {
         let recipes = []
         for(let r of results){
             const temp = new Recipe(r['id'], r['title'], r['image']);
+            await temp.getText();
             console.log(temp);
             recipes.push(temp);
         }
@@ -54,14 +56,48 @@ class RecipeManager {
         }
     }
 
+    //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
+    static updateRecipes= async(recipes, cuisine) => {
+        if (!cuisine || !recipes){
+            return;
+        }
+        const recipeSubcollection = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes');
+        for (let r of recipes){
+            console.log(`Updating recipe ${r.id} in database`);
+            const ref = doc(recipeSubcollection, r.id.toString()).withConverter(recipeConverter);
+            await setDoc(ref, r);
+        }
+    }
+
     static async queryCuisine(cuisine){
         let collectionref = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
 
         let recipes;
+        let needsUpdate = false;
         await getDocs(collectionref)
         .then(async (querySnapshot) => {
             recipes = querySnapshot.docs.map(doc => doc.data());
-        });
+            return recipes;
+        }).then(async (recipes) => {
+            console.log(recipes);
+            for(let r of recipes){
+                if (r.text == null){
+                    needsUpdate = true;
+                    console.log(`Found null text for recipe ${r.title}`);
+                    await r.fillText();
+                }
+            }
+            return recipes;
+        }).then((recipes) => {
+            if (needsUpdate){
+                console.log(`Saving filled text for recipes`);
+                this.updateRecipes(recipes, cuisine);
+            }
+            return recipes;
+        })
+        // }).then( async (recipes) => {
+        //     this.updateRecipes(recipes, cuisine);
+        // })
 
         if(recipes.length > 0){
             return recipes;
