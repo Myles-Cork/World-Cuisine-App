@@ -1,59 +1,31 @@
 import React from "react";
 import "./recipeview.css";
 import RatingManager from "../../model/RatingManager";
-import UserManager from "../../model/UserManager";
 
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: null,
-      current_rating: null,
-      // recipe_text: null,
+      // user_id: UserManager.getLoggedInUserId(),
+      // current_rating: null,
     }
+    // if(this.props.recipe != null){
+    //   RatingManager.getRating(user_id,this.props.recipe.id)
+    //   .then((rating) => {
+    //     this.setState({
+    //       user_id: user_id,
+    //       current_rating: rating,
+    //     });
+    //   });
+    // }
   };
 
-  Rate = (recipe_id, value) => {
+  Rate = (user_id, recipe_id, value) => {
     console.log(`Rating recipe! ${value}`);
-    RatingManager.addNewRating(this.state.user_id, recipe_id, value);
+    RatingManager.addNewRating(user_id, recipe_id, value);
   }
-
-  // componentDidUpdate(){
-  //   const user_id = UserManager.getLoggedInUserId();
-
-  //   if(this.props.recipe != null){
-  //     RatingManager.getRating(user_id,this.props.recipe.id)
-  //     .then((rating) => {
-  //       this.setState({
-  //         user_id: user_id,
-  //         current_rating: rating,
-  //         // recipe_text: this.props.recipe.getText()
-  //       });
-  //     });
-  //   }
-  // }
-  componentDidMount(){
-    const user_id = UserManager.getLoggedInUserId();
-
-    if(this.props.recipe != null){
-      RatingManager.getRating(user_id,this.props.recipe.id)
-      .then((rating) => {
-        this.setState({
-          user_id: user_id,
-          current_rating: rating,
-          // recipe_text: this.props.recipe.getText()
-        });
-      });
-    }
-  }
-
-  componentWillUnmount(){
-    this.props.recipe = null;
-  }
-
 
   render(){
-
     const visible = this.props.recipe!==null;
 
     const view = visible?(
@@ -68,7 +40,7 @@ class RecipeView extends React.Component {
               type="text"
               className="rating_textbox"
               value={5}
-              onChange={(e) => this.Rate(this.props.recipe.id, e.target.value)}
+              onChange={(e) => this.Rate(this.props.user_id, this.props.recipe.id, e.target.value)}
               placeholder="Your rating (X/5)"
             />
           </form>

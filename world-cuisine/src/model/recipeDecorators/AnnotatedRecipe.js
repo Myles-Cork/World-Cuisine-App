@@ -1,5 +1,5 @@
 // Decorator pattern: Concrete decorator
-class AnnotatedRecipe extends Recipe {
+class AnnotatedRecipe extends RecipeDecorator {
 
     note;
 
@@ -13,3 +13,4 @@ class AnnotatedRecipe extends Recipe {
     }
 
 }
+export default AnnotatedRecipe;

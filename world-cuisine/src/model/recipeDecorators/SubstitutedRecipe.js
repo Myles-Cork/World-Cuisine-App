@@ -1,5 +1,5 @@
 // Decorator pattern: Concrete decorator
-class SubstitutedRecipe extends Recipe {
+class SubstitutedRecipe extends RecipeDecorator {
 
     target;
     replacement;
@@ -15,3 +15,4 @@ class SubstitutedRecipe extends Recipe {
     }
 
 }
+export default SubstitutedRecipe;

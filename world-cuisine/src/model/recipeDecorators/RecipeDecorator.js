@@ -1,3 +1,4 @@
+
 // Decorator pattern: Abstract Decorator
 class RecipeDecorator extends RecipeAncestor {
     decoratedRecipe;
@@ -12,3 +13,4 @@ class RecipeDecorator extends RecipeAncestor {
     }
 
 }
+export default RecipeDecorator;

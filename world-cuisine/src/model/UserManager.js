@@ -1,4 +1,19 @@
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
+import Recipe from "../model/Recipe";
+
+const noteConverter = {
+    toFirestore: (note) => {
+        return {
+            id: note.id,
+            text: note.text,
+            recipeID: note.decoratedRecipe
+        };
+    },
+    fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return new Recipe(data.id, data.title, data.image, data.text);
+    }
+};
 
 class UserManager {
 
@@ -8,7 +23,7 @@ class UserManager {
         const user = auth.currentUser;
         //console.log(user);
         if(user){
-            //console.log(`Found user ${user.uid}`);
+            console.log(`Found user ${user.uid}`);
             return user.uid;
         } else {
             console.log("No user logged in");

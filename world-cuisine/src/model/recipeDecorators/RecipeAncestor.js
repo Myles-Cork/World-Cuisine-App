@@ -1,11 +1,12 @@
 // Decorator pattern: Abstract component
-class RecipeAncestor extends Object {
+class RecipeAncestor {
 
     constructor(){
-        super();
+        //super();
     }
 
     getText(){
         alert("Abstract method not overriden: getText in RecipeAncestor");
     }
 }
+export default RecipeAncestor;
