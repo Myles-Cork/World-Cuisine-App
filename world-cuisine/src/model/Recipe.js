@@ -1,6 +1,7 @@
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
+import RecipeAncestor from "./recipeDecorators/RecipeAncestor";
 
-class Recipe extends Object {
+class Recipe extends RecipeAncestor {
     id;
     title;
     image;
@@ -24,10 +25,10 @@ class Recipe extends Object {
         return this;
     }
 
-    async getText(){
-        if (this.text == null){
-            await this.fillText();
-        }
+    getText(){
+        // if (this.text == null){
+        //     await this.fillText();
+        // }
         return this.text;
     }
 
