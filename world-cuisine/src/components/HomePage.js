@@ -22,23 +22,28 @@ class HomePage extends React.Component {
   }
   
   openRecipe = (r) => {
-    
     if(r != null){
       console.log(`Opening recipe: ${r.title}`);
-      RatingManager.getRating(this.state.user_id, r.id)
-      .then((rating) => {
-
-      });
     }
     this.setState({
       recipeOpened: r
     });
   }
 
+  rate = (user_id, recipe, value) => {
+    console.log(`Rating recipe! ${value}`);
+    const user_id_local = UserManager.getLoggedInUserId();
+    let wrappedRecipe = RatingManager.addNewRating(user_id_local, recipe, value);
+    console.log(wrappedRecipe);
+    this.setState({
+      recipeOpened: wrappedRecipe
+    })
+  }
+
   render(){
     return (
       <div>
-        <RecipeView recipe={this.state.recipeOpened} user_id={this.state.user_id} openRecipe={this.openRecipe}/>
+        <RecipeView recipe={this.state.recipeOpened} user_id={this.state.user_id} openRecipe={this.openRecipe} rate={this.rate}/>
         <div>
           <NavBar/>
           <Routes>

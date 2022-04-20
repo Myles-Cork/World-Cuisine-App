@@ -1,50 +1,45 @@
 import React from "react";
 import "./recipeview.css";
-import RatingManager from "../../model/RatingManager";
+import UserManager from "../../model/UserManager";
 
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // user_id: UserManager.getLoggedInUserId(),
-      // current_rating: null,
-    }
     // if(this.props.recipe != null){
-    //   RatingManager.getRating(user_id,this.props.recipe.id)
-    //   .then((rating) => {
-    //     this.setState({
-    //       user_id: user_id,
-    //       current_rating: rating,
-    //     });
-    //   });
+    //   this.state = {
+    //     recipeText: this.props.recipe.getText(),
+    //     recipeRating: this.props.recipe.getRating(),
+    //   };
+    // } else {
+      // this.state = {
+      //   recipeText: null,
+      //   recipeRating: "",
+      // }
     // }
+    // this.state.user_id = UserManager.getLoggedInUserId();
   };
-
-  Rate = (user_id, recipe_id, value) => {
-    console.log(`Rating recipe! ${value}`);
-    RatingManager.addNewRating(user_id, recipe_id, value);
-  }
 
   render(){
     const visible = this.props.recipe!==null;
+    const user_id_render = UserManager.getLoggedInUserId();
 
     const view = visible?(
       <div className="recipeViewContainer">
         <div className="recipeView">
-          <h1>{this.props.recipe.title}</h1>
-          <img src={this.props.recipe.image}/>
+          <h1>{this.props.recipe.getTitle()}</h1>
+          <img src={this.props.recipe.getImage()}/>
           <p>{this.props.recipe.getText()}</p>
-          <h2>Current Rating: {this.state.current_rating}</h2>
+          <h2>Current Rating: {this.props.recipe.getRating()}</h2>
           <form className="recipe_actions">
             <input
               type="text"
               className="rating_textbox"
-              value={5}
-              onChange={(e) => this.Rate(this.props.user_id, this.props.recipe.id, e.target.value)}
+              value={this.props.recipe.getRating()}
+              onChange={(e) => this.props.rate(user_id_render, this.props.recipe, e.target.value)}
               placeholder="Your rating (X/5)"
             />
           </form>
-          <button onClick={() => {this.Rate(this.props.recipe.id, 3)}}>Rate</button>
+          {/* <button onClick={() => {this.props.rate(this.props.recipe.id, 3)}}>Rate</button> */}
           <button onClick={() => {this.props.openRecipe(null)}}>Exit</button>
         </div>
         <div className="outsideView" onClick={(e) => {this.props.openRecipe(null)}}/>

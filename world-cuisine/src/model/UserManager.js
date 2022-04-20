@@ -19,9 +19,9 @@ class UserManager {
 
     static getLoggedInUserId(){
         const auth = FirebaseAdapter.getAuth();
-        //console.log(auth);
+        console.log(auth);
         const user = auth.currentUser;
-        //console.log(user);
+        console.log(user);
         if(user){
             console.log(`Found user ${user.uid}`);
             return user.uid;

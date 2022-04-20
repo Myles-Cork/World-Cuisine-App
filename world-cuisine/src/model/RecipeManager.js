@@ -10,7 +10,7 @@ const recipeConverter = {
             id: recipe.id,
             title: recipe.title,
             image: recipe.image,
-            text: recipe.getText(),
+            text: recipe.text,
         };
     },
     fromFirestore: (snapshot, options) => {

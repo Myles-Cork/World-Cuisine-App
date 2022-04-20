@@ -1,3 +1,4 @@
+import RecipeAncestor from "./RecipeAncestor";
 
 // Decorator pattern: Abstract Decorator
 class RecipeDecorator extends RecipeAncestor {
@@ -9,7 +10,19 @@ class RecipeDecorator extends RecipeAncestor {
     }
 
     getText(){
-        alert("Abstract method not overriden: getText in RecipeDecorator");
+        return this.decoratedRecipe.getText();
+    }
+
+    getRating(){
+        return this.decoratedRecipe.getRating();
+    }
+
+    getImage(){
+        return this.decoratedRecipe.getImage();
+    }
+
+    getTitle(){
+        return this.decoratedRecipe.getTitle();
     }
 
 }

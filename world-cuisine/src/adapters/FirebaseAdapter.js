@@ -2,7 +2,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
-import { getFirestore, query, getDocs, collection, where, addDoc } from "firebase/firestore";
+import { getFirestore, setDoc, doc, collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -39,6 +39,11 @@ const FirebaseAdapter = (function() {
           name,
           authProvider: "local",
           email,
+        })
+        .then(async () =>{
+          await setDoc(doc(db, 'userPrefs', user.uid),{
+            uid: user.uid,
+          })
         });
       } catch (err) {
         console.error(err);

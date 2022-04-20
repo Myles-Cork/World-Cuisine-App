@@ -12,9 +12,6 @@ class Recipe extends RecipeAncestor {
         this.id = id;
         this.title = title;
         this.image = image;
-        // if (text == null)
-        //     this.text = this.getText();
-        // else
         this.text = text;
     }
 
@@ -26,12 +23,20 @@ class Recipe extends RecipeAncestor {
     }
 
     getText(){
-        // if (this.text == null){
-        //     await this.fillText();
-        // }
         return this.text;
     }
 
+    getRating(user_id){
+        return "";
+    }
+
+    getImage(){
+        return this.image;
+    }
+
+    getTitle(){
+        return this.title;
+    }
 
 }
 export default Recipe;
