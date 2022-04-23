@@ -11,8 +11,12 @@ class AnnotatedRecipe extends RecipeDecorator {
         this.note = note;
     }
 
-    getText(){
-        return this.note + "\n" + this.decoratedRecipe.getText();
+    getNote(){
+        return this.note + this.decoratedRecipe.printNote();
+    }
+
+    printNote(){
+        return "  * " + this.note + this.decoratedRecipe.printNote();
     }
 
     static noteConverter = {
@@ -46,7 +50,7 @@ class AnnotatedRecipe extends RecipeDecorator {
 
     savePrefs = async (collection) => {
         const ratingDoc = doc(collection, 'note').withConverter(this.noteConverter);
-        await setDoc(ratingDoc, {note: this.note});
+        await setDoc(ratingDoc, {note: this.getNote()});
     }
 
 }

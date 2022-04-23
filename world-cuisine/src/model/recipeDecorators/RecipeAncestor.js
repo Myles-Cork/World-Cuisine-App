@@ -27,7 +27,14 @@ class RecipeAncestor {
 
     savePrefs(){
         alert("Abstract method not overridden: savePrefs in RecipeAncestor");
+    }
 
+    getNote(){
+        alert("Abstract method not overridden: getNote in RecipeAncestor");
+    }
+
+    printNote(){
+        return this.getNote();
     }
 }
 export default RecipeAncestor;

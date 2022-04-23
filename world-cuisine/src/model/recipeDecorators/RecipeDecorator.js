@@ -29,5 +29,13 @@ class RecipeDecorator extends RecipeAncestor {
         return this.decoratedRecipe.getTitle();
     }
 
+    getNote(){
+        return this.decoratedRecipe.getNote();
+    }
+
+    printNote(){
+        return this.decoratedRecipe.printNote();
+    }
+
 }
 export default RecipeDecorator;

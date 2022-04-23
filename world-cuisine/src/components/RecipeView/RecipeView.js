@@ -18,10 +18,12 @@ class RecipeView extends React.Component {
           <h1>{this.props.recipe.getTitle()}</h1>
           <img src={this.props.recipe.getImage()}/>
           <p>{this.props.recipe.getText()}</p>
-          <h2>Current Rating: {this.props.recipe.getRating()}</h2>
+          <h3>Notes:</h3>
+          <p>{this.props.recipe.printNote()}</p>
+          <h3>Current Rating: {this.props.recipe.getRating()}</h3>
           <form className="recipe_actions">
             <div>
-              <label for="rating_textbox">Rating: </label>
+              <label>Rating: </label>
               <input
               type="text"
               className="rating_textbox"
@@ -30,12 +32,12 @@ class RecipeView extends React.Component {
               placeholder="Your rating (X/5)"
             /></div>
             <div>
-              <label for="notes_textbox">Notes: </label>
+              <label>Notes: </label>
               <input
               type="text"
               id="notes_textbox"
               className="notes_textbox"
-              content={""}
+              placeholder=""
             />
             <button onClick={(e) => {e.preventDefault(); this.props.note(this.props.recipe, document.getElementById("notes_textbox").value)}}>Add Note</button>
             </div>

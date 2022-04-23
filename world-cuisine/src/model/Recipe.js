@@ -46,5 +46,9 @@ class Recipe extends RecipeAncestor {
         return;
     }
 
+    getNote(){
+        return "";
+    }
+
 }
 export default Recipe;
