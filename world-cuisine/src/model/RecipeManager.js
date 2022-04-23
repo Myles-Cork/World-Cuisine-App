@@ -56,6 +56,13 @@ class RecipeManager {
         }
     }
 
+    static addNewRecipe = async(title,body,img,cuisine) => {
+        let recipe_id = Math.floor(Math.random()*(9999999-1000000)+1000000)
+        let new_recipe = new Recipe(recipe_id,title,img,body)
+
+        RecipeManager.saveRecipes([new_recipe],cuisine)
+    }
+
     //https://www.reddit.com/r/Firebase/comments/fpicg8/comment/fll70js/?utm_source=share&utm_medium=web2x&context=3
     static updateRecipes = async(recipes, cuisine) => {
         if (!cuisine || !recipes){
