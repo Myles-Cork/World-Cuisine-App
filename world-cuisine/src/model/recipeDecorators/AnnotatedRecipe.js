@@ -1,3 +1,5 @@
+import RecipeDecorator from "./RecipeDecorator";
+
 // Decorator pattern: Concrete decorator
 class AnnotatedRecipe extends RecipeDecorator {
 
@@ -9,7 +11,7 @@ class AnnotatedRecipe extends RecipeDecorator {
     }
 
     getText(){
-        return note + "\n" + decoratedRecipe.getText();
+        return this.note + "\n" + this.decoratedRecipe.getText();
     }
 
 }

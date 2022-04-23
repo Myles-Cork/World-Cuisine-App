@@ -5,6 +5,10 @@ class RecipeAncestor {
         //super();
     }
 
+    getID(){
+        alert("Abstract method not overridden: getID in RecipeAncestor");
+    }
+
     getText(){
         alert("Abstract method not overridden: getText in RecipeAncestor");
     }
@@ -19,6 +23,11 @@ class RecipeAncestor {
 
     getTitle(){
         alert("Abstract method not overridden: getTitle in RecipeAncestor");
+    }
+
+    savePrefs(){
+        alert("Abstract method not overridden: savePrefs in RecipeAncestor");
+
     }
 }
 export default RecipeAncestor;

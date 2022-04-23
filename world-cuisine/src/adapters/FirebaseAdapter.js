@@ -1,7 +1,7 @@
 //Based on: https://blog.logrocket.com/user-authentication-firebase-react-apps/
 
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { getFirestore, setDoc, doc, collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {

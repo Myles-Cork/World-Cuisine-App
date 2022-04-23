@@ -113,6 +113,5 @@ class RecipeManager {
         }
     }
 
-
 }
 export default RecipeManager;

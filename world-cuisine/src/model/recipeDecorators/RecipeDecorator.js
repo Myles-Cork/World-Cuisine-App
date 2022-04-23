@@ -9,6 +9,10 @@ class RecipeDecorator extends RecipeAncestor {
         this.decoratedRecipe = recipe;
     }
 
+    getID(){
+        return this.decoratedRecipe.getID();
+    }
+
     getText(){
         return this.decoratedRecipe.getText();
     }

@@ -8,32 +8,39 @@ import CreatePage from "./Create/CreatePage";
 import RecipeView from "./RecipeView/RecipeView";
 import Dashboard from "./Dashboard";
 import UserManager from "../model/UserManager";
-import RatingManager from "../model/RatingManager";
+import DecoratorManager from "../model/DecoratorManager";
 
 class HomePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       recipeOpened: null,
-      user_id: UserManager.getLoggedInUserId(),
     };
 
     this.openRecipe = this.openRecipe.bind(this);
   }
-  
-  openRecipe = (r) => {
+
+  openRecipe = async (r) => {
+    const user_id_local = UserManager.getLoggedInUserId();
     if(r != null){
       console.log(`Opening recipe: ${r.title}`);
+      await DecoratorManager.decorate(r, user_id_local)
+      .then((r) =>{
+        this.setState({
+          recipeOpened: r
+        });
+      })
+    } else {
+      this.setState({
+        recipeOpened: r
+      });
     }
-    this.setState({
-      recipeOpened: r
-    });
   }
 
-  rate = (user_id, recipe, value) => {
+  rate = (recipe, value) => {
     console.log(`Rating recipe! ${value}`);
     const user_id_local = UserManager.getLoggedInUserId();
-    let wrappedRecipe = RatingManager.addNewRating(user_id_local, recipe, value);
+    let wrappedRecipe = DecoratorManager.addNewRating(user_id_local, recipe, value);
     console.log(wrappedRecipe);
     this.setState({
       recipeOpened: wrappedRecipe

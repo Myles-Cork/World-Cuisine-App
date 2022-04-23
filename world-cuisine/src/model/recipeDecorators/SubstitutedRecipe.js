@@ -1,3 +1,5 @@
+import RecipeDecorator from "./RecipeDecorator";
+
 // Decorator pattern: Concrete decorator
 class SubstitutedRecipe extends RecipeDecorator {
 
@@ -11,7 +13,7 @@ class SubstitutedRecipe extends RecipeDecorator {
     }
 
     getText(){
-        return decoratedRecipe.getText().replace(target, replacement);
+        return this.decoratedRecipe.getText().replace(this.target, this.replacement);
     }
 
 }

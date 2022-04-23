@@ -5,23 +5,12 @@ import UserManager from "../../model/UserManager";
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
-    // if(this.props.recipe != null){
-    //   this.state = {
-    //     recipeText: this.props.recipe.getText(),
-    //     recipeRating: this.props.recipe.getRating(),
-    //   };
-    // } else {
-      // this.state = {
-      //   recipeText: null,
-      //   recipeRating: "",
-      // }
-    // }
-    // this.state.user_id = UserManager.getLoggedInUserId();
   };
 
   render(){
     const visible = this.props.recipe!==null;
-    const user_id_render = UserManager.getLoggedInUserId();
+    console.log(this.props.recipe);
+    //const user_id_render = UserManager.getLoggedInUserId(); // Ideally should come from Dashboard to Homepage to here
 
     const view = visible?(
       <div className="recipeViewContainer">
@@ -35,7 +24,7 @@ class RecipeView extends React.Component {
               type="text"
               className="rating_textbox"
               value={this.props.recipe.getRating()}
-              onChange={(e) => this.props.rate(user_id_render, this.props.recipe, e.target.value)}
+              onChange={(e) => this.props.rate(this.props.recipe, e.target.value)}
               placeholder="Your rating (X/5)"
             />
           </form>
@@ -52,3 +41,4 @@ class RecipeView extends React.Component {
   }
 }
 export default RecipeView;
+ 
