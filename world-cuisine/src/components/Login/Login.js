@@ -12,7 +12,7 @@ function Login() {
   const [user, loading, error] = useAuthState(FirebaseAdapter.getAuth());
   const navigate = useNavigate();
   if (user){
-      console.log(user.uid);
+      console.log(`User: ${user.uid}`);
   }
   useEffect(() => {
     if (loading) {

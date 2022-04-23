@@ -1,6 +1,7 @@
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
+import RecipeAncestor from "./recipeDecorators/RecipeAncestor";
 
-class Recipe extends Object {
+class Recipe extends RecipeAncestor {
     id;
     title;
     image;
@@ -11,26 +12,39 @@ class Recipe extends Object {
         this.id = id;
         this.title = title;
         this.image = image;
-        // if (text == null)
-        //     this.text = this.getText();
-        // else
         this.text = text;
     }
 
     async fillText(){
         const recipeData = await SpoonacularAdapter.recipeInformation(this.id)
         this.text = recipeData["instructions"]
-        console.log(this.text)
+        //console.log(this.text)
         return this;
     }
 
-    async getText(){
-        if (this.text == null){
-            await this.fillText();
-        }
+    getID(){
+        return this.id;
+    }
+
+    getText(){
         return this.text;
     }
 
+    getRating(user_id){
+        return "";
+    }
+
+    getImage(){
+        return this.image;
+    }
+
+    getTitle(){
+        return this.title;
+    }
+
+    savePrefs(){
+        return;
+    }
 
 }
 export default Recipe;
