@@ -41,7 +41,24 @@ class HomePage extends React.Component {
     console.log(`Rating recipe! ${value}`);
     const user_id_local = UserManager.getLoggedInUserId();
     let wrappedRecipe = DecoratorManager.addNewRating(user_id_local, recipe, value);
-    console.log(wrappedRecipe);
+    this.setState({
+      recipeOpened: wrappedRecipe
+    })
+  }
+
+  note = (recipe, text) => {
+    console.log(`Adding note to recipe`);
+    const user_id_local = UserManager.getLoggedInUserId();
+    let wrappedRecipe = DecoratorManager.addNewNote(user_id_local, recipe, text);
+    this.setState({
+      recipeOpened: wrappedRecipe
+    })
+  }
+
+  substitute = (recipe, target, replacement) => {
+    console.log('Creating substitution for recipe');
+    const user_id_local = UserManager.getLoggedInUserId();
+    let wrappedRecipe = DecoratorManager.addNewSubstitution(user_id_local, recipe, target, replacement);
     this.setState({
       recipeOpened: wrappedRecipe
     })
@@ -50,7 +67,7 @@ class HomePage extends React.Component {
   render(){
     return (
       <div>
-        <RecipeView recipe={this.state.recipeOpened} user_id={this.state.user_id} openRecipe={this.openRecipe} rate={this.rate}/>
+        <RecipeView recipe={this.state.recipeOpened} user_id={this.state.user_id} openRecipe={this.openRecipe} rate={this.rate} note={this.note} substitute={this.substitute}/>
         <div>
           <NavBar/>
           <Routes>
