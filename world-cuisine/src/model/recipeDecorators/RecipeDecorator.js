@@ -33,6 +33,10 @@ class RecipeDecorator extends RecipeAncestor {
         return this.decoratedRecipe.getNote();
     }
 
+    getFavorited(){
+        return this.decoratedRecipe.getFavorited();
+    }
+
     printNote(){
         return this.decoratedRecipe.printNote();
     }

@@ -50,5 +50,9 @@ class Recipe extends RecipeAncestor {
         return "";
     }
 
+    getFavorited(){
+        return false;
+    }
+
 }
 export default Recipe;

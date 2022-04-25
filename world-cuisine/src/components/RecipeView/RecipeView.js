@@ -15,7 +15,18 @@ class RecipeView extends React.Component {
     const view = visible?(
       <div className="recipeViewContainer">
         <div className="recipeView">
-          <h1>{this.props.recipe.getTitle()}</h1>
+          <h1>
+            {this.props.recipe.getTitle()} 
+            <div className="star">
+              <input type={"checkbox"}
+                id="favoritestar"
+                defaultChecked={this.props.recipe.getFavorited()}
+                onChange={(e) => this.props.favorite(this.props.recipe, e.target.checked)}
+              />
+              <label htmlFor="favoritestar"/>
+            </div>
+          </h1>
+          
           <img src={this.props.recipe.getImage()}/>
           <p>{this.props.recipe.getText()}</p>
           <h3>Notes:</h3>
