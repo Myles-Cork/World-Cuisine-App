@@ -33,6 +33,10 @@ class RecipeAncestor {
         alert("Abstract method not overridden: getNote in RecipeAncestor");
     }
 
+    getFavorited(){
+        alert("Abstract method not overridden: getFavorited in RecipeAncestor");
+    }
+
     printNote(){
         return this.getNote();
     }

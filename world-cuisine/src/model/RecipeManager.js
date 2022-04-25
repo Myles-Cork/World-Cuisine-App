@@ -1,5 +1,5 @@
 import Recipe from "./Recipe";
-import { collection, setDoc, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, setDoc, getDocs, getDoc, doc, query } from "firebase/firestore";
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
 
@@ -18,6 +18,13 @@ const recipeConverter = {
         return new Recipe(data.id, data.title, data.image, data.text);
     }
 };
+
+const cuisinelist = [
+    "African", "American", "British", "Cajun", "Caribbean", "Chinese", 
+    "Eastern European", "European", "French", "German", "Greek", "Indian", 
+    "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", 
+    "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", 
+    "Spanish", "Thai", "Vietnamese"];
 
 class RecipeManager {
 
@@ -118,6 +125,30 @@ class RecipeManager {
                 return recipes;
             })
         }
+    }
+
+
+    static async getAllRecipes() {
+        let allrecipes = [];
+        let promises = [];
+
+        for(let cuisinename of cuisinelist){
+            promises.push(
+                getDocs(collection(FirebaseAdapter.getDB(), 'recipes', cuisinename, 'recipes').withConverter(recipeConverter))
+                .then((querySnapshot) => {
+                    let recipes = querySnapshot.docs.map(doc => doc.data());
+                    return recipes;
+                }).then( (recipes) => {
+                    for(let recipe of recipes){
+                        allrecipes.push(recipe);
+                    }
+                }).then(()=>{return})
+            )
+        }
+
+        return Promise.all(promises).then(()=>{
+            return allrecipes;
+        });
     }
 
 }
