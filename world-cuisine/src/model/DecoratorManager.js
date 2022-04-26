@@ -1,5 +1,5 @@
 // import Rating from "./Rating";
-import { collection, setDoc, getDocs, doc, query, where, updateDoc} from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import AnnotatedRecipe from "./recipeDecorators/AnnotatedRecipe";
 import FavoritedRecipe from "./recipeDecorators/FavoritedRecipe";
@@ -65,7 +65,7 @@ class DecoratorManager {
         const wrappedRecipe = new FavoritedRecipe(recipe, favoritestatus);
         this.saveDecoration(user_id, wrappedRecipe);
         // Update user's favorites list
-        UserManager.updateUserFavoritesList(userid, recipe, favoritestatus);
+        UserManager.updateUserFavoritesList(user_id, recipe, favoritestatus);
         console.log('added new favorite status');
         return wrappedRecipe;
     }

@@ -1,5 +1,5 @@
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
-import { collection, setDoc, getDocs, getDoc, doc, collectionGroup, query, where } from "firebase/firestore";
+import { collection, setDoc, updateDoc, getDocs, query, where } from "firebase/firestore";
 import Recipe from "../model/Recipe";
 import RecipeManager from "./RecipeManager";
 
@@ -66,7 +66,7 @@ class UserManager {
         }
     }
 
-    static async updateUserFavoritesList(userid, recipe, favoritestatus){
+    static async updateUserFavoritesList(user_id, recipe, favoritestatus){
         const col = collection(FirebaseAdapter.getDB(), "users");
         const q = query(col, where("uid", "==", user_id));
         
