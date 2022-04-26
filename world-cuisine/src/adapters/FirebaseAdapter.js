@@ -14,6 +14,7 @@ const firebaseConfig = {
   measurementId: "G-27PLNDM9FR"
 };
 
+// https://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-a-singleton-in-javascript
 const FirebaseAdapter = (function() {
 
   const app = initializeApp(firebaseConfig);
