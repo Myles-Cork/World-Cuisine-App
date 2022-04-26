@@ -64,8 +64,6 @@ class DecoratorManager {
     static addNewFavorite = (user_id, recipe, favoritestatus) => {
         const wrappedRecipe = new FavoritedRecipe(recipe, favoritestatus);
         this.saveDecoration(user_id, wrappedRecipe);
-        // Update user's favorites list
-        UserManager.updateUserFavoritesList(user_id, recipe, favoritestatus);
         console.log('added new favorite status');
         return wrappedRecipe;
     }

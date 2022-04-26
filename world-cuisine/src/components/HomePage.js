@@ -67,6 +67,8 @@ class HomePage extends React.Component {
     console.log(`Changing recipe favorite status to ${favoritestatus}`);
     const user_id_local = UserManager.getLoggedInUserId();
     let wrappedRecipe = DecoratorManager.addNewFavorite(user_id_local, recipe, favoritestatus);
+    // Update user's favorites list
+    UserManager.updateUserFavoritesList(user_id_local, recipe, favoritestatus);
     this.setState({
       recipeOpened: wrappedRecipe
     })
