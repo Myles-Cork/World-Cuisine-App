@@ -1,5 +1,5 @@
 // import Rating from "./Rating";
-import { collection, setDoc, getDocs, doc, query, where, updateDoc} from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import AnnotatedRecipe from "./recipeDecorators/AnnotatedRecipe";
 import FavoritedRecipe from "./recipeDecorators/FavoritedRecipe";
@@ -64,29 +64,6 @@ class DecoratorManager {
     static addNewFavorite = (user_id, recipe, favoritestatus) => {
         const wrappedRecipe = new FavoritedRecipe(recipe, favoritestatus);
         this.saveDecoration(user_id, wrappedRecipe);
-
-        // Update user's favorites list
-        const col = collection(FirebaseAdapter.getDB(), "users");
-        const q = query(col, where("uid", "==", user_id));
-        
-        getDocs(q).then((userdocs)=>{
-            const userdocref = userdocs.docs[0].ref;
-            let favorites = userdocs.docs[0].data().favorites;
-            if(favorites == null){
-                favorites = [];
-            }
-            const rid = recipe.getID();
-            const ridind = favorites.indexOf(rid)
-            if(favoritestatus && ridind === -1){
-                favorites.push(rid);
-                setDoc(userdocref, {favorites: favorites}, {merge: true});
-            }else if(!favoritestatus && ridind !== -1){
-                favorites.splice(ridind,1);
-                updateDoc(userdocref, {favorites: favorites}, {merge: true});
-            }
-        }
-            
-        );
         console.log('added new favorite status');
         return wrappedRecipe;
     }

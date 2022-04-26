@@ -1,8 +1,7 @@
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
-import { collection, setDoc, getDocs, getDoc, doc, collectionGroup, query, where } from "firebase/firestore";
+import { collection, setDoc, updateDoc, getDocs, query, where } from "firebase/firestore";
 import Recipe from "../model/Recipe";
 import RecipeManager from "./RecipeManager";
-//import { favoritedConverter } from "../model/recipeDecorators/FavoritedRecipe"
 
 const noteConverter = {
     toFirestore: (note) => {
@@ -65,6 +64,28 @@ class UserManager {
             console.log("No user logged in");
             return([]);
         }
+    }
+
+    static async updateUserFavoritesList(user_id, recipe, favoritestatus){
+        const col = collection(FirebaseAdapter.getDB(), "users");
+        const q = query(col, where("uid", "==", user_id));
+        
+        getDocs(q).then((userdocs)=>{
+            const userdocref = userdocs.docs[0].ref;
+            let favorites = userdocs.docs[0].data().favorites;
+            if(favorites == null){
+                favorites = [];
+            }
+            const rid = recipe.getID();
+            const ridind = favorites.indexOf(rid)
+            if(favoritestatus && ridind === -1){
+                favorites.push(rid);
+                setDoc(userdocref, {favorites: favorites}, {merge: true});
+            }else if(!favoritestatus && ridind !== -1){
+                favorites.splice(ridind,1);
+                updateDoc(userdocref, {favorites: favorites}, {merge: true});
+            }
+        });
     }
 
 }
