@@ -52,6 +52,10 @@ class UserManager {
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
             let favorites = data.favorites;
+            if(favorites == null){
+                favorites = [];
+            }
+            console.log(favorites);
             let allrecipes = [];
             allrecipes = await RecipeManager.getAllRecipes();
             return allrecipes.filter((recipe)=>{

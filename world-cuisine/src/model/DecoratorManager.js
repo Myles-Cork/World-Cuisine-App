@@ -65,13 +65,16 @@ class DecoratorManager {
         const wrappedRecipe = new FavoritedRecipe(recipe, favoritestatus);
         this.saveDecoration(user_id, wrappedRecipe);
 
+        // Update user's favorites list
         const col = collection(FirebaseAdapter.getDB(), "users");
         const q = query(col, where("uid", "==", user_id));
-        //setDoc(q.docs., {favorites: [recipe.getID()]});
         
         getDocs(q).then((userdocs)=>{
             const userdocref = userdocs.docs[0].ref;
             let favorites = userdocs.docs[0].data().favorites;
+            if(favorites == null){
+                favorites = [];
+            }
             const rid = recipe.getID();
             const ridind = favorites.indexOf(rid)
             if(favoritestatus && ridind === -1){
