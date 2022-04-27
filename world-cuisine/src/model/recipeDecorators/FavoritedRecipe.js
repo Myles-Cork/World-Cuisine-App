@@ -33,9 +33,9 @@ class FavoritedRecipe extends RecipeDecorator {
         .then((snapshot) => {
             if (snapshot.exists()){
                 const favorited = snapshot.data();
-                console.log(favorited);
+                // console.log(favorited);
                 const wrapped = new FavoritedRecipe(recipe, favorited);
-                console.log(wrapped);
+                // console.log(wrapped);
                 return wrapped;
             } else {
                 return recipe;

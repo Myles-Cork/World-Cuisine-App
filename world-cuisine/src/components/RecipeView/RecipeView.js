@@ -9,8 +9,7 @@ class RecipeView extends React.Component {
 
   render(){
     const visible = this.props.recipe!==null;
-    console.log(this.props.recipe);
-    //const user_id_render = UserManager.getLoggedInUserId(); // Ideally should come from Dashboard to Homepage to here
+    // console.log(this.props.recipe);
 
     const view = visible?(
       <div className="recipeViewContainer">

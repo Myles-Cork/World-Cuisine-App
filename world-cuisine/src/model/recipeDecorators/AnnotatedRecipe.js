@@ -37,9 +37,9 @@ class AnnotatedRecipe extends RecipeDecorator {
         .then((snapshot) => {
             if (snapshot.exists()){
                 const note = snapshot.data();
-                console.log(note);
+                // console.log(note);
                 const wrapped = new AnnotatedRecipe(recipe, note);
-                console.log(wrapped);
+                // console.log(wrapped);
                 return wrapped;
             } else {
                 return recipe;

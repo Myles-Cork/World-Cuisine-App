@@ -33,9 +33,9 @@ class RatedRecipe extends RecipeDecorator {
         .then((snapshot) => {
             if (snapshot.exists()){
                 const rating = snapshot.data();
-                console.log(rating);
+                // console.log(rating);
                 const wrapped = new RatedRecipe(recipe, rating);
-                console.log(wrapped);
+                // console.log(wrapped);
                 return wrapped;
             } else {
                 return recipe;

@@ -23,7 +23,7 @@ class HomePage extends React.Component {
   openRecipe = async (r) => {
     const user_id_local = UserManager.getLoggedInUserId();
     if(r != null){
-      console.log(`Opening recipe: ${r.title}`);
+      // console.log(`Opening recipe: ${r.title}`);
       await DecoratorManager.decorate(r, user_id_local)
       .then((r) =>{
         this.setState({

@@ -33,10 +33,10 @@ class RecipeManager {
         for(let r of results){
             const temp = new Recipe(r['id'], r['title'], r['image']);
             await temp.fillText();
-            console.log(temp);
+            // console.log(temp);
             recipes.push(temp);
         }
-        console.log(recipes);
+        // console.log(recipes);
         return recipes;
     }
 
@@ -48,8 +48,8 @@ class RecipeManager {
         const recipeSubcollection = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes');
         console.log(recipeSubcollection);
         for (let r of recipes){
-            console.log(`Checking for recipe ${r.id} in database`);
-            console.log(r);
+            // console.log(`Checking for recipe ${r.id} in database`);
+            // console.log(r);
             const docRef = doc(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes', r.id.toString());
             const docSnap = await getDoc(docRef);
 
@@ -93,7 +93,7 @@ class RecipeManager {
             recipes = querySnapshot.docs.map(doc => doc.data());
             return recipes;
         }).then(async (recipes) => {
-            console.log(recipes);
+            // console.log(recipes);
             for(let r of recipes){
                 let text = await r.getText();
                 if (text == null){
@@ -116,11 +116,11 @@ class RecipeManager {
             // Get from Spoonacular
             return SpoonacularAdapter.cuisineSearch(cuisine)
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 return RecipeManager.arrayFromApiResults(data["results"])
             })
             .then((recipes) => {
-                console.log(recipes)
+                // console.log(recipes)
                 RecipeManager.saveRecipes(recipes, cuisine)
                 return recipes;
             })

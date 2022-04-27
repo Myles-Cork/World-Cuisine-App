@@ -17,8 +17,8 @@ class SearchPage extends React.Component {
   handleCuisineSelect = async (cuisineSelection) => {
     this.setState({cuisine: cuisineSelection})
     const recipes = await RecipeManager.queryCuisine(cuisineSelection);
-    console.log("Search Page received recipes:");
-    console.log(recipes);
+    // console.log("Search Page received recipes:");
+    // console.log(recipes);
     this.setState({results: recipes});
   }
 

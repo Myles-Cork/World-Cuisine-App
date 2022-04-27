@@ -25,7 +25,7 @@ class UserManager {
         const user = auth.currentUser;
         //console.log(user);
         if(user){
-            console.log(`Found user ${user.uid}`);
+            // console.log(`Found user ${user.uid}`);
             return user.uid;
         } else {
             console.log("No user logged in");
@@ -54,7 +54,7 @@ class UserManager {
             if(favorites == null){
                 favorites = [];
             }
-            console.log(favorites);
+            // console.log(favorites);
             let allrecipes = [];
             allrecipes = await RecipeManager.getAllRecipes();
             return allrecipes.filter((recipe)=>{

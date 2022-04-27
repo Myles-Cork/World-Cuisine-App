@@ -9,10 +9,10 @@ import UserManager from "./UserManager";
 class DecoratorManager {
 
     static decorate = async (recipe, user_id) => {
-        console.log(`Loading customizations for ${recipe.title}`);
+        // console.log(`Loading customizations for ${recipe.title}`);
         // pull from Firebase
-        console.log(user_id);
-        console.log(recipe.getID());
+        // console.log(user_id);
+        // console.log(recipe.getID());
         const recipeModsCollection = collection(FirebaseAdapter.getDB(), 'userPrefs', user_id, recipe.getID().toString());
         //console.log(recipeModsCollection);
         return await RatedRecipe.decorate(recipe, recipeModsCollection)
@@ -27,7 +27,7 @@ class DecoratorManager {
 
     // The asynchronous part (new version)
     static saveDecoration = async (user_id, wrappedRecipe) => {
-        console.log(`Save modification to dB, ${user_id}, ${wrappedRecipe.getTitle()}`);
+        // console.log(`Save modification to dB, ${user_id}, ${wrappedRecipe.getTitle()}`);
         
         // userPrefs collection; doc for specific user; collection for recipe ID
         const recipeModsCollection = collection(FirebaseAdapter.getDB(), 'userPrefs', user_id, wrappedRecipe.getID().toString());

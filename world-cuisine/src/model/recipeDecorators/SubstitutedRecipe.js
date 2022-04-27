@@ -36,10 +36,10 @@ class SubstitutedRecipe extends RecipeDecorator {
         .then((snapshot) => {
             if (snapshot.exists()){
                 const [target, replacement] = snapshot.data();
-                console.log(target);
-                console.log(replacement);
+                // console.log(target);
+                // console.log(replacement);
                 const wrapped = new SubstitutedRecipe(recipe, target, replacement);
-                console.log(wrapped);
+                // console.log(wrapped);
                 return wrapped;
             } else {
                 return recipe;

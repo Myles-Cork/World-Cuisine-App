@@ -7,7 +7,7 @@ class SearchMenu extends React.Component{
   onSelect = (event) => {
     event.preventDefault();
     let cuisineSelection = document.getElementById("cuisineSelect").value;
-    console.log(cuisineSelection);
+    // console.log(cuisineSelection);
     this.props.onSelect(cuisineSelection);
   }
 
