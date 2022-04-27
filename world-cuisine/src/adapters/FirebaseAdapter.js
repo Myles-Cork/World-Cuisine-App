@@ -14,6 +14,7 @@ const firebaseConfig = {
   measurementId: "G-27PLNDM9FR"
 };
 
+// "The old way" https://www.sitepoint.com/javascript-design-patterns-singleton/
 // https://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-a-singleton-in-javascript
 const FirebaseAdapter = (function() {
 

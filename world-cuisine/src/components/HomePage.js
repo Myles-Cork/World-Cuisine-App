@@ -8,6 +8,7 @@ import RecipeView from "./RecipeView/RecipeView";
 import Dashboard from "./Dashboard";
 import UserManager from "../model/UserManager";
 import DecoratorManager from "../model/DecoratorManager";
+import LogPage from "./LogPage";
 
 class HomePage extends React.Component {
   constructor(props){
@@ -84,6 +85,7 @@ class HomePage extends React.Component {
             <Route path="search" element={<SearchPage openRecipe={this.openRecipe}/>} />
             <Route path="favorites" element={<FavPage openRecipe={this.openRecipe}/>} />
             <Route path="create" element={<CreatePage />} />
+            <Route path="metrics" element={<LogPage />} />
           </Routes>
           <Dashboard/>
         </div>

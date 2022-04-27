@@ -10,6 +10,7 @@ class NavBar extends React.Component{
           <li><NavLink to="./search" className={({isActive}) => (isActive ? "selected" : "")}>Search</NavLink></li>
           <li><NavLink to="./favorites" className={({isActive}) => (isActive ? "selected" : "")}>Favorites</NavLink></li>
           <li><NavLink to="./create" className={({isActive}) => (isActive ? "selected" : "")}>Create Recipe</NavLink></li>
+          <li><NavLink to="./metrics" className={({isActive}) => (isActive ? "selected" : "")}>Metrics</NavLink></li>
         </ul>
       </nav>
     );
