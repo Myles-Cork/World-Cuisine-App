@@ -2,12 +2,10 @@ import React from "react";
 import SingletonApiPointsLogger from "../adapters/SingletonApiPointsLogger";
 import "./LogPage.css";
 
-
 class LogPage extends React.Component {
 
     render(){
-            const localInstance = SingletonApiPointsLogger.getInstance();
-            //const localInstance = new SingletonApiPointsLogger();
+        const localInstance = SingletonApiPointsLogger.getInstance();
         return (
             <div className="log_view">
             <div className="points_view">

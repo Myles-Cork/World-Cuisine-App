@@ -13,7 +13,7 @@ class FavPage extends React.Component {
   }
 
   componentDidMount(){
-    UserManager.getFavoriteRecipies().then((favs) => {
+    UserManager.getFavoriteRecipes().then((favs) => {
       if (favs !== undefined || favs !== null){
         this.setState({
           favorites: favs

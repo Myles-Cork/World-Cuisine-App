@@ -3,30 +3,30 @@ import { collection, setDoc, getDocs, getDoc, doc, query } from "firebase/firest
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import SpoonacularAdapter from "../adapters/SpoonacularAdapter";
 
-// https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
-const recipeConverter = {
-    toFirestore: (recipe) => {
-        return {
-            id: recipe.id,
-            title: recipe.title,
-            image: recipe.image,
-            text: recipe.text,
-        };
-    },
-    fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return new Recipe(data.id, data.title, data.image, data.text);
-    }
-};
-
-const cuisinelist = [
-    "African", "American", "British", "Cajun", "Caribbean", "Chinese", 
-    "Eastern European", "European", "French", "German", "Greek", "Indian", 
-    "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", 
-    "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", 
-    "Spanish", "Thai", "Vietnamese"];
-
 class RecipeManager {
+
+    // https://firebase.google.com/docs/firestore/manage-data/add-data#web-version-9_1
+    static recipeConverter = {
+        toFirestore: (recipe) => {
+            return {
+                id: recipe.id,
+                title: recipe.title,
+                image: recipe.image,
+                text: recipe.text,
+            };
+        },
+        fromFirestore: (snapshot, options) => {
+            const data = snapshot.data(options);
+            return new Recipe(data.id, data.title, data.image, data.text);
+        }
+    };
+
+    static cuisinelist = [
+        "African", "American", "British", "Cajun", "Caribbean", "Chinese", 
+        "Eastern European", "European", "French", "German", "Greek", "Indian", 
+        "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", 
+        "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", 
+        "Spanish", "Thai", "Vietnamese"];
 
     static arrayFromApiResults = async(results) => {
         let recipes = []
@@ -57,7 +57,7 @@ class RecipeManager {
                 console.log(`Recipe ${r.title} already in database`);
             } else {
                 console.log(`Saving recipe ${r.id} in database`);
-                const ref = doc(recipeSubcollection, r.id.toString()).withConverter(recipeConverter);
+                const ref = doc(recipeSubcollection, r.id.toString()).withConverter(RecipeManager.recipeConverter);
                 await setDoc(ref, r);
             }
         }
@@ -78,13 +78,13 @@ class RecipeManager {
         const recipeSubcollection = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes');
         for (let r of recipes){
             console.log(`Updating recipe ${r.id} in database`);
-            const ref = doc(recipeSubcollection, r.id.toString()).withConverter(recipeConverter);
+            const ref = doc(recipeSubcollection, r.id.toString()).withConverter(RecipeManager.recipeConverter);
             await setDoc(ref, r);
         }
     }
 
     static async queryCuisine(cuisine){
-        let collectionref = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes').withConverter(recipeConverter);
+        let collectionref = collection(FirebaseAdapter.getDB(), 'recipes', cuisine, 'recipes').withConverter(RecipeManager.recipeConverter);
 
         let recipes;
         let needsUpdate = false;
@@ -127,14 +127,13 @@ class RecipeManager {
         }
     }
 
-
     static async getAllRecipes() {
         let allrecipes = [];
         let promises = [];
 
-        for(let cuisinename of cuisinelist){
+        for(let cuisinename of RecipeManager.cuisinelist){
             promises.push(
-                getDocs(collection(FirebaseAdapter.getDB(), 'recipes', cuisinename, 'recipes').withConverter(recipeConverter))
+                getDocs(collection(FirebaseAdapter.getDB(), 'recipes', cuisinename, 'recipes').withConverter(RecipeManager.recipeConverter))
                 .then((querySnapshot) => {
                     let recipes = querySnapshot.docs.map(doc => doc.data());
                     return recipes;

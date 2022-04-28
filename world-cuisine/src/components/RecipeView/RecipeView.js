@@ -1,6 +1,5 @@
 import React from "react";
 import "./recipeview.css";
-import UserManager from "../../model/UserManager";
 
 class RecipeView extends React.Component {
   constructor(props) {

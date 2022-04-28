@@ -1,5 +1,4 @@
 import React from 'react';
-import RecipeManager from '../../model/RecipeManager';
 import "./search.css"
 
 class SearchMenu extends React.Component{

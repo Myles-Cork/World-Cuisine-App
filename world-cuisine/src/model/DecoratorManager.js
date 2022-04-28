@@ -5,7 +5,7 @@ import AnnotatedRecipe from "./recipeDecorators/AnnotatedRecipe";
 import FavoritedRecipe from "./recipeDecorators/FavoritedRecipe";
 import RatedRecipe from "./recipeDecorators/RatedRecipe";
 import SubstitutedRecipe from "./recipeDecorators/SubstitutedRecipe";
-import UserManager from "./UserManager";
+
 class DecoratorManager {
 
     static decorate = async (recipe, user_id) => {

@@ -1,21 +1,6 @@
 import FirebaseAdapter from "../adapters/FirebaseAdapter";
 import { collection, setDoc, updateDoc, getDocs, query, where } from "firebase/firestore";
-import Recipe from "../model/Recipe";
 import RecipeManager from "./RecipeManager";
-
-const noteConverter = {
-    toFirestore: (note) => {
-        return {
-            id: note.id,
-            text: note.text,
-            recipeID: note.decoratedRecipe
-        };
-    },
-    fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return new Recipe(data.id, data.title, data.image, data.text);
-    }
-};
 
 class UserManager {
 
@@ -41,7 +26,7 @@ class UserManager {
         }
     }
 
-    static async getFavoriteRecipies(){
+    static async getFavoriteRecipes(){
         const auth = FirebaseAdapter.getAuth();
         const user = auth.currentUser;
         if(user){
