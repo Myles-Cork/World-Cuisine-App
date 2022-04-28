@@ -2,9 +2,9 @@
 Final Project for CSCI 5448 at CU Boulder
 
 ## Team Members
-Myles Cork
-Kai Drumm
-Robert Meikle
+- Myles Cork
+- Kai Drumm
+- Robert Meikle
 
 ## To Run Locally
 - Install Node.js and npm if not already.
@@ -16,3 +16,5 @@ Robert Meikle
 - Refer to /world-cuisine/package.json for specific software versions
 
 Demo Recording: https://drive.google.com/file/d/1_XZRo4o4FsZ4gSUXddkWLMHVGeLpzCJw/view?usp=sharing
+
+[OOAD Project 6 Class Diagram 2.pdf](https://github.com/Myles-Cork/World-Cuisine-App/files/8579141/OOAD.Project.6.Class.Diagram.2.pdf)
